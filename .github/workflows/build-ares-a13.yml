@@ -32,12 +32,13 @@ on:
         required: true
         default: 'true'
         type: string
+
 jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Dependencies
         run: |
@@ -88,7 +89,7 @@ jobs:
           echo "KernelSU added successfully"
 
       - name: Apply SUSFS Patches
-        if: ${{ github.event.inputs.ENABLE_SUSFS == 'true' && github.event.inputs.KERNELSU_VARIANT != 'sukisu' }}
+        if: github.event.inputs.ENABLE_SUSFS == 'true' && github.event.inputs.KERNELSU_VARIANT != 'sukisu'
         run: |
           cd kernel
           echo "Applying SUSFS patches..."
@@ -209,13 +210,13 @@ EOF
           ls -la "../$ZIP_NAME"
 
       - name: Upload Kernel
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: K40G-Kernel
           path: K40G-*.zip
 
       - name: Upload Build Log
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-log
           path: kernel/build.log
