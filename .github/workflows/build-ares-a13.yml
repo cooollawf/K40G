@@ -7,23 +7,31 @@ on:
         description: 'Kernel Branch'
         required: true
         default: 'ares-t-oss'
+        type: string
       DEFCONFIG:
         description: 'Defconfig Name'
         required: true
         default: 'ares_defconfig'
+        type: string
       KERNELSU_VARIANT:
         description: 'KernelSU Variant (resukisu/sukisu/official)'
         required: true
         default: 'resukisu'
+        type: choice
+        options:
+          - resukisu
+          - sukisu
+          - official
       ENABLE_SUSFS:
         description: 'Enable SUSFS'
         required: true
         default: 'true'
+        type: string
       ENABLE_KPM:
         description: 'Enable KPM Support'
         required: true
         default: 'true'
-
+        type: string
 jobs:
   build:
     runs-on: ubuntu-20.04
